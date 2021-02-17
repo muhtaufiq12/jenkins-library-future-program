@@ -25,20 +25,6 @@ def call(Map params){
                     }
                 }
             }
-            stage('Package Application with HELM') {
-                agent {
-                    docker {
-                        image 'kmdr7/helm-kubectl:latest'
-                    }
-                }
-                steps {
-                    withEnv([
-                        'CONTAINER_REGISTRY='+params.containerRegistry,
-                        'CONTAINER_IMAGE='+params.containerImage,
-                        'CONTAINER_VERSION='+params.containerVersion,
-                    ])
-                }
-            }
             stage('Deploy Application to Kubernetes') {
                 agent {
                     docker {
